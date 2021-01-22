@@ -8,10 +8,9 @@
 
 - name: Add repository for AdoptOpenJDK
   apt_repository:
-    repo: 'deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ bionic main'
+    repo: 'deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ {{ ansible_distribution_release }} main'
     filename: adoptopenjdk
     state: present
-    codename: trusty
     update_cache: true
 
 - name: Install java packages
