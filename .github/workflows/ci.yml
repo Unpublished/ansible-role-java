@@ -37,6 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        playbook: [playbook.yml]
         python: [3.5, 3.7, 3.8]
         include:
           - playbook: adoptopenjdk-repositories.yml
