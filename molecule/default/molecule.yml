@@ -44,6 +44,7 @@ provisioner:
     defaults:
       callback_whitelist: profile_tasks,timer
   playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
     verify: ../resources/tests/verify.yml
   lint:
     name: ansible-lint
