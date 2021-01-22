@@ -38,6 +38,9 @@ jobs:
     strategy:
       matrix:
         python: [3.5, 3.7, 3.8]
+        include:
+          - playbook: adoptopenjdk-repositories.yml
+            python: 3.8
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
@@ -59,3 +62,4 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           ANSIBLE_LIBRARY: ~/.ansible/plugins/modules
+          MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
