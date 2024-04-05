@@ -15,16 +15,13 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.
+      - name: Set up Python 3
         uses: actions/setup-python@v3
         with:
           python-version: "3.10"
 
       - name: Install test dependencies.
-        run: pip3 install --upgrade ansible==2.9.* docker molecule==2.22
-
-      - name: Install ansible-lint.
-        run: pip3 install --upgrade ansible-lint==4.2.0
+        run: pip install -r requirements.txt
 
       - name: Run yamllint tests.
         run: yamllint . -c .yamllint
@@ -44,7 +41,7 @@ jobs:
           - "3.10"
         include:
           - playbook: adoptopenjdk-repositories.yml
-            python: 3.10
+            python: "3.10"
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v4
@@ -55,10 +52,7 @@ jobs:
           python-version: ${{ matrix.python }}
 
       - name: Install test dependencies.
-        run: pip3 install --upgrade ansible==2.9.* docker molecule==2.22
-
-      - name: Install ansible-lint.
-        run: pip3 install --upgrade ansible-lint==4.2.0
+        run: pip install -r requirements.txt
 
       - name: Run Molecule tests.
         run: molecule test -s default
