@@ -21,7 +21,7 @@ jobs:
           python-version: "3.10"
 
       - name: Install test dependencies.
-        run: pip install -r requirements.txt "ansible-core<2.16"
+        run: pip install -r requirements.txt "ansible-compat<2.0"
 
       - name: Run yamllint tests.
         run: yamllint . -c .yamllint
@@ -50,7 +50,7 @@ jobs:
           python-version: ${{ matrix.python }}
 
       - name: Install test dependencies.
-        run: pip install -r requirements.txt "ansible-core<2.16"
+        run: pip install -r requirements.txt "ansible-compat<2.0"
 
       - name: Run Molecule tests.
         run: molecule test -s default
