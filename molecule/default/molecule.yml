@@ -10,11 +10,13 @@ lint: |
 platforms:
   - name: test-docker-centos7-openjdk
     image: leandelivery/docker-systemd:centos7
+    pre_build_image: true
     privileged: true
     groups:
       - rhel_family
   - name: test-docker-ubuntu1804-openjdk
     image: leandelivery/docker-systemd:ubuntu-18.04
+    pre_build_image: true
     privileged: true
     security_opts:
       - seccomp=unconfined
@@ -29,6 +31,7 @@ platforms:
       - debian_family
   - name: test-docker-debian13-openjdk
     image: geerlingguy/docker-debian13-ansible:latest
+    pre_build_image: true
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro

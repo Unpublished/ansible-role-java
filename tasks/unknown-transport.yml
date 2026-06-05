@@ -1,4 +1,4 @@
 ---
 - name: Warn on unsupported transport
-  ansible.builtin.debug:
+  debug:
     msg: "This role does not support '{{ transport }}' transport. Please contact support@lean-delivery.com"
