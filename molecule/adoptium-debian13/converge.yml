@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: ansible-role-java
+  vars:
+    java_distribution: adoptium
+    java_major_version: 11
+    transport: repositories

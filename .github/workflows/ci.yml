@@ -32,14 +32,22 @@ jobs:
   molecule:
     name: Molecule
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.allow_failure || false }}
     strategy:
+      fail-fast: false
       matrix:
-        playbook: [playbook.yml]
-        python:
-          - "3.10"
         include:
+          - playbook: playbook.yml
+            python: "3.10"
+            scenario: default
+            allow_failure: true
           - playbook: adoptopenjdk-repositories.yml
             python: "3.10"
+            scenario: default
+            allow_failure: true
+          - scenario: adoptium-debian13
+            python: "3.10"
+            allow_failure: false
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v4
@@ -53,7 +61,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Molecule tests.
-        run: molecule test -s default
+        run: molecule test -s ${{ matrix.scenario }}
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
