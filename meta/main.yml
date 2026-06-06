@@ -43,7 +43,7 @@ galaxy_info:
     - "jre"
     - "oracle"
     - "openjdk"
-    - "adoptopenjdk"
+    - "adoptium"
     - "sapmachine"
     - "zulu"
     - "sapjvm"

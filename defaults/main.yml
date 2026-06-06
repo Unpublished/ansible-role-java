@@ -12,14 +12,14 @@ java_distribution: openjdk
 
 # OpenJDK tarball supported only jdk
 # Oracle java supported jre/server-jre/jdk
-# AdoptOpenJDK supported jdk/jre
+# Adoptium supported jdk/jre
 # SapMachine supported jdk/jre
 # Alibaba Dragonwell supported jdk only
 # Amazon Corretto 8 supported jdk/jre, jre only for Windows and Amazon Linux2
 # Amazon Corretto 11 supported only jdk
 java_package: jdk
 
-# AdoptOpenJDK Implementation (hotspot/openj9)
+# Adoptium Implementation (hotspot/openj9)
 adoptium_impl: hotspot
 
 # OpenJDK Redhat: 8 (packages) / 11 (package for centos7, tarball for all other) / 12 (tarball)

@@ -1,14 +1,14 @@
 ---
-- name: Add apt-key for AdoptOpenJDK
+- name: Add apt-key for Adoptium
   apt_key:
-    url: https://adoptium.jfrog.io/adoptium/api/gpg/key/public
+    url: https://packages.adoptium.net/artifactory/api/gpg/key/public
     state: present
   register: package_install
   until: package_install is succeeded
 
-- name: Add repository for AdoptOpenJDK
+- name: Add repository for Adoptium
   apt_repository:
-    repo: 'deb https://packages.adoptium.net/artifactory/ {{ ansible_distribution_release }} main'
+    repo: 'deb https://packages.adoptium.net/artifactory/deb/ {{ ansible_distribution_release }} main'
     filename: adoptium
     state: present
     update_cache: true

@@ -4,5 +4,6 @@
   roles:
     - role: ansible-role-java
   vars:
-    java_distribution: adoptopenjdk
+    java_distribution: adoptium
+    java_major_version: 11
     transport: repositories
