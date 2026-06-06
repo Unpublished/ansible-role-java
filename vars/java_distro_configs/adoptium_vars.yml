@@ -32,7 +32,7 @@ jdk_package: >-
   {{ 'temurin-' + java_major_version|string + '-' + java_package }}
 
 java_folder_repo_transport: >-
-  {{ 'temurin-' ~ java_major_version|string ~ '.*' }}
+  {{ 'temurin-' ~ java_major_version|string ~ '(-.*)?$' }}
 
 java_folder: >-
   {{ (not java_tarball_install|bool and (ansible_system == 'Linux'))
