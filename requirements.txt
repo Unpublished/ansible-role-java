@@ -1,4 +1,5 @@
 ansible>=5.0,<6.0
+ansible-compat<2.0
 ansible-lint==4.2.0
 docker<6
 molecule[docker]==3.6.1
