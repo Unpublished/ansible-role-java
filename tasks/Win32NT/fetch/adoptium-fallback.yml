@@ -20,9 +20,9 @@
       {{ (download_page.content | from_json).binaries | map(attribute='package.binary_link') | list +
         (download_page.content | from_json).binaries | map(attribute='package.checksum_link') | list }}
 
-- name: Exit if AdobtOpenJDK version is not found
+- name: Exit if Adoptium version is not found
   fail:
-    msg: 'AdoptOpenJDK version {{ java_major_version }} not found'
+    msg: 'Adoptium version {{ java_major_version }} not found'
   when: release_url[0] is not defined
 
 - name: 'Fetch artifact checksum file {{ release_url[1] }}'

@@ -1,0 +1,34 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: docker
+lint: |
+  yamllint . -c .yamllint
+platforms:
+  - name: test-docker-debian13-adoptium
+    image: geerlingguy/docker-debian13-ansible:latest
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    groups:
+      - debian_family
+provisioner:
+  name: ansible
+  log: false
+  config_options:
+    defaults:
+      callback_whitelist: profile_tasks,timer
+  playbooks:
+    verify: ../resources/tests/verify.yml
+  lint: |
+    ansible-lint
+scenario:
+  name: adoptium-debian13
+verifier:
+  name: ansible
+  lint: |
+    ansible-lint

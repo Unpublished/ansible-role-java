@@ -29,12 +29,10 @@ adoptium_folder: >-
   {{ (transport == 'chocolatey') | ternary(adoptium_choco_folder, java_def_folder_ext_transport) }}
 
 jdk_package: >-
-  {{ 'adoptium-' + java_major_version|string+ '-' + adoptium_impl|string
-                  + ((java_package == 'jre') | ternary('-' + java_package, '')) }}
+  {{ 'temurin-' + java_major_version|string + '-' + java_package }}
 
 java_folder_repo_transport: >-
-  {{ 'adoptium-' ~ java_major_version|string ~ '-' ~ adoptium_impl|string
-        ~ ((java_package == 'jre') | ternary('-' ~ java_package, '')) }}
+  {{ 'temurin-' ~ java_major_version|string ~ '(-.*)?$' }}
 
 java_folder: >-
   {{ (not java_tarball_install|bool and (ansible_system == 'Linux'))
@@ -42,4 +40,4 @@ java_folder: >-
 
 choco_java_package: 'adoptium{{ java_package_suffix }}{{ java_jre_suffix }}'
 
-choco_path: 'C:\Program Files\AdoptOpenJDK'
+choco_path: 'C:\Program Files\Eclipse Adoptium'

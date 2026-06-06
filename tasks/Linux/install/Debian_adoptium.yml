@@ -1,14 +1,42 @@
 ---
-- name: Add apt-key for AdoptOpenJDK
-  apt_key:
-    url: https://adoptium.jfrog.io/adoptium/api/gpg/key/public
+- name: Install GPG prerequisites for Adoptium
+  apt:
+    name:
+      - apt-transport-https
+      - curl
+      - gnupg
     state: present
-  register: package_install
-  until: package_install is succeeded
+    update_cache: true
 
-- name: Add repository for AdoptOpenJDK
+- name: Ensure /usr/share/keyrings directory exists
+  file:
+    path: /usr/share/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Download Adoptium GPG key
+  command: >
+    curl -fsSL https://packages.adoptium.net/artifactory/api/gpg/key/public
+    -o /tmp/adoptium.gpg.asc
+  args:
+    creates: /usr/share/keyrings/adoptium.gpg
+
+- name: Import Adoptium GPG key into keyring
+  command: gpg --batch --yes --dearmor -o /usr/share/keyrings/adoptium.gpg /tmp/adoptium.gpg.asc
+  args:
+    creates: /usr/share/keyrings/adoptium.gpg
+
+- name: Remove temporary Adoptium GPG key file
+  file:
+    path: /tmp/adoptium.gpg.asc
+    state: absent
+
+- name: Add repository for Adoptium
   apt_repository:
-    repo: 'deb https://packages.adoptium.net/artifactory/ {{ ansible_distribution_release }} main'
+    repo: >-
+      deb [signed-by=/usr/share/keyrings/adoptium.gpg]
+      https://packages.adoptium.net/artifactory/deb/
+      {{ ansible_distribution_release }} main
     filename: adoptium
     state: present
     update_cache: true

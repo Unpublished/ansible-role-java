@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  namespace: "lean_delivery"
   role_name: "java"
   author: "Lean Delivery team <team@lean-delivery.com>"
   description: "Lean Delivery Java install"
@@ -42,7 +43,7 @@ galaxy_info:
     - "jre"
     - "oracle"
     - "openjdk"
-    - "adoptopenjdk"
+    - "adoptium"
     - "sapmachine"
     - "zulu"
     - "sapjvm"

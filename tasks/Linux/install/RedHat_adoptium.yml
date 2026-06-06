@@ -1,13 +1,13 @@
 ---
-- name: Add repository for AdoptOpenJDK
+- name: Add repository for Adoptium
   yum_repository:
-    name: AdoptOpenJDK
-    description: AdoptOpenJDK
-    baseurl: "http://adoptium.jfrog.io/adoptium/rpm/centos/\
+    name: Adoptium
+    description: Adoptium
+    baseurl: "https://packages.adoptium.net/artifactory/rpm/centos/\
               {{ rh_dist_repo_version }}/x86_64"
     enabled: true
     gpgcheck: true
-    gpgkey: https://adoptium.jfrog.io/adoptium/api/gpg/key/public
+    gpgkey: https://packages.adoptium.net/artifactory/api/gpg/key/public
 
 - name: Install java packages
   yum:
