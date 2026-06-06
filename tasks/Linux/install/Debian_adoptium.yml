@@ -28,6 +28,11 @@
   args:
     creates: /usr/share/keyrings/adoptium.gpg
 
+- name: Remove temporary Adoptium GPG key file
+  file:
+    path: /tmp/adoptium.gpg.asc
+    state: absent
+
 - name: Add repository for Adoptium
   apt_repository:
     repo: >-
