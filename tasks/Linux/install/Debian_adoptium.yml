@@ -3,6 +3,7 @@
   apt:
     name:
       - apt-transport-https
+      - curl
       - gnupg
     state: present
     update_cache: true
@@ -14,14 +15,11 @@
     mode: '0755'
 
 - name: Download Adoptium GPG key
-  get_url:
-    url: https://packages.adoptium.net/artifactory/api/gpg/key/public
-    dest: /tmp/adoptium.gpg.asc
-    mode: '0644'
-  register: adoptium_key_download
-  retries: 3
-  delay: 5
-  until: adoptium_key_download is succeeded
+  command: >
+    curl -fsSL https://packages.adoptium.net/artifactory/api/gpg/key/public
+    -o /tmp/adoptium.gpg.asc
+  args:
+    creates: /usr/share/keyrings/adoptium.gpg
 
 - name: Import Adoptium GPG key into keyring
   command: gpg --batch --yes --dearmor -o /usr/share/keyrings/adoptium.gpg /tmp/adoptium.gpg.asc
